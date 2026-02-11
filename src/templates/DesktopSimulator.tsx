@@ -273,8 +273,7 @@ const DesktopSimulator = () => {
                 </p>
               </motion.div>
             ) : (
-              <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="relative">
-                {/* Photo mosaic background */}
+              <>
                 {/* Photo mosaic background */}
                 <div className="pointer-events-none absolute inset-0 grid grid-cols-4 gap-2 p-4 opacity-10">
                   {config.photos.map((photo, i) => (
@@ -287,43 +286,44 @@ const DesktopSimulator = () => {
                     />
                   ))}
                 </div>
-                <div className="relative z-10">
-                <p className="mb-4 text-sm uppercase tracking-widest text-white/70">
-                  System Failure
-                </p>
-                <h2 className="mb-6 text-3xl font-bold text-white sm:text-4xl">
-                  I've fallen for you.
-                </h2>
-                <p className="mb-8 text-xl text-white/90">
-                  {config.recipientName}, will you be my Valentine?
-                </p>
-                <div className="flex justify-center gap-4">
-                  <motion.button
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.9 }}
-                    onClick={() => fireConfetti()}
-                    className="border-2 px-8 py-3 font-bold text-white"
-                    style={{
-                      borderColor: "#fff",
-                      background: "rgba(255,255,255,0.2)",
-                    }}
-                  >
-                    Yes! 💙
-                  </motion.button>
-                  <motion.button
-                    whileHover={{ scale: 0.9, opacity: 0.5 }}
-                    className="border-2 px-6 py-3 font-bold"
-                    style={{
-                      borderColor: "rgba(255,255,255,0.3)",
-                      color: "rgba(255,255,255,0.5)",
-                    }}
-                  >
-                    Ctrl+Z
-                  </motion.button>
-                </div>
-                <p className="mt-6 text-sm text-white/50">— {config.senderName}</p>
-                </div>
-              </motion.div>
+                
+                <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="relative z-10">
+                  <p className="mb-4 text-sm uppercase tracking-widest text-white/70">
+                    System Failure
+                  </p>
+                  <h2 className="mb-6 text-3xl font-bold text-white sm:text-4xl">
+                    I've fallen for you.
+                  </h2>
+                  <p className="mb-8 text-xl text-white/90">
+                    {config.recipientName}, will you be my Valentine?
+                  </p>
+                  <div className="flex justify-center gap-4">
+                    <motion.button
+                      whileHover={{ scale: 1.1 }}
+                      whileTap={{ scale: 0.9 }}
+                      onClick={() => fireConfetti()}
+                      className="border-2 px-8 py-3 font-bold text-white"
+                      style={{
+                        borderColor: "#fff",
+                        background: "rgba(255,255,255,0.2)",
+                      }}
+                    >
+                      Yes! 💙
+                    </motion.button>
+                    <motion.button
+                      whileHover={{ scale: 0.9, opacity: 0.5 }}
+                      className="border-2 px-6 py-3 font-bold"
+                      style={{
+                        borderColor: "rgba(255,255,255,0.3)",
+                        color: "rgba(255,255,255,0.5)",
+                      }}
+                    >
+                      Ctrl+Z
+                    </motion.button>
+                  </div>
+                  <p className="mt-6 text-sm text-white/50">— {config.senderName}</p>
+                </motion.div>
+              </>
             )}
           </motion.div>
         )}

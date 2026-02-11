@@ -307,7 +307,7 @@ const RPGQuest = () => {
                   }}
                   transition={{ duration: 2, repeat: Infinity }}
                 >
-                  ✦ ITEM EQUIPPED! ✦
+                  ✦ VALENTINE ACCEPTED! ✦
                 </motion.p>
                 <p className="mt-3 text-lg" style={{ color: "#5cb85c" }}>
                   Happy Valentine's Day! 💚
