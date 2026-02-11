@@ -103,3 +103,12 @@ All colors MUST be HSL.
     @apply bg-background text-foreground;
   }
 }
+/* Hides the back button on all templates */
+a[href="#/"], a[href="/"] {
+    display: none !important;
+}
+
+/* Alternative: If the button has a specific class like 'back-button' */
+.back-button, button[aria-label="Back"] {
+    display: none !important;
+}
