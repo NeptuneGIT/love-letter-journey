@@ -11,6 +11,7 @@ const RPGQuest = () => {
   const [shaking, setShaking] = useState(false);
   const [lootText, setLootText] = useState("");
   const [lootDone, setLootDone] = useState(false);
+  const [equipped, setEquipped] = useState(false);
 
   const fullLootText = `You found ${config.rpgLoot}! ${config.recipientName}, will you equip it?`;
 
@@ -236,7 +237,7 @@ const RPGQuest = () => {
               transition={{ type: "spring" }}
               className="mb-8 text-7xl"
             >
-              📦✨
+              {equipped ? "🛡️⚔️" : "📦✨"}
             </motion.div>
 
             <div
@@ -256,7 +257,7 @@ const RPGQuest = () => {
               </p>
             </div>
 
-            {lootDone && (
+            {lootDone && !equipped && (
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -265,7 +266,10 @@ const RPGQuest = () => {
                 <motion.button
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.9 }}
-                  onClick={() => fireConfetti()}
+                  onClick={() => {
+                    setEquipped(true);
+                    fireConfetti();
+                  }}
                   className="border-4 px-8 py-3 font-bold"
                   style={{ background: "#2d5a27", borderColor: "#5cb85c", color: "#5cb85c" }}
                 >
@@ -281,7 +285,40 @@ const RPGQuest = () => {
               </motion.div>
             )}
 
-            {lootDone && (
+            {equipped && (
+              <motion.div
+                initial={{ scale: 0, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                transition={{ type: "spring", damping: 12 }}
+                className="mt-4 text-center"
+              >
+                <motion.p
+                  className="text-3xl font-black"
+                  style={{
+                    color: "#fbbf24",
+                    textShadow: "0 0 20px rgba(251,191,36,0.6), 0 0 40px rgba(92,184,92,0.3)",
+                  }}
+                  animate={{
+                    textShadow: [
+                      "0 0 20px rgba(251,191,36,0.6), 0 0 40px rgba(92,184,92,0.3)",
+                      "0 0 30px rgba(251,191,36,0.9), 0 0 60px rgba(92,184,92,0.5)",
+                      "0 0 20px rgba(251,191,36,0.6), 0 0 40px rgba(92,184,92,0.3)",
+                    ],
+                  }}
+                  transition={{ duration: 2, repeat: Infinity }}
+                >
+                  ✦ ITEM EQUIPPED! ✦
+                </motion.p>
+                <p className="mt-3 text-lg" style={{ color: "#5cb85c" }}>
+                  Happy Valentine's Day! 💚
+                </p>
+                <p className="mt-2 text-sm" style={{ color: "#3d8b37" }}>
+                  — {config.senderName}
+                </p>
+              </motion.div>
+            )}
+
+            {lootDone && !equipped && (
               <p className="mt-4 text-sm" style={{ color: "#3d8b37" }}>
                 — {config.senderName}
               </p>

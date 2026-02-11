@@ -146,7 +146,7 @@ const DesktopSimulator = () => {
                   <img
                     src={photo}
                     alt=""
-                    className="h-12 w-12 border border-white/30 object-cover"
+                    className="h-36 w-36 border border-white/30 object-cover"
                   />
                   <span className="text-xs text-white" style={{ textShadow: "1px 1px #000" }}>
                     photo_{i + 1}.bmp
@@ -154,7 +154,7 @@ const DesktopSimulator = () => {
                 </div>
               ))}
               <div className="flex flex-col items-center gap-1">
-                <div className="flex h-12 w-12 items-center justify-center border border-white/30 bg-white/10 text-2xl">
+                <div className="flex h-36 w-36 items-center justify-center border border-white/30 bg-white/10 text-4xl">
                   💌
                 </div>
                 <span className="text-xs text-white" style={{ textShadow: "1px 1px #000" }}>
@@ -273,7 +273,20 @@ const DesktopSimulator = () => {
                 </p>
               </motion.div>
             ) : (
-              <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+              <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="relative">
+                {/* Photo mosaic background */}
+                <div className="pointer-events-none absolute inset-0 -inset-x-32 -inset-y-20 z-0 flex flex-wrap items-center justify-center gap-3 opacity-10">
+                  {config.photos.map((photo, i) => (
+                    <img
+                      key={i}
+                      src={photo}
+                      alt=""
+                      className="h-24 w-24 rounded object-cover"
+                      style={{ transform: `rotate(${(i % 2 === 0 ? 1 : -1) * (3 + (i % 5))}deg)` }}
+                    />
+                  ))}
+                </div>
+                <div className="relative z-10">
                 <p className="mb-4 text-sm uppercase tracking-widest text-white/70">
                   System Failure
                 </p>
@@ -308,6 +321,7 @@ const DesktopSimulator = () => {
                   </motion.button>
                 </div>
                 <p className="mt-6 text-sm text-white/50">— {config.senderName}</p>
+                </div>
               </motion.div>
             )}
           </motion.div>

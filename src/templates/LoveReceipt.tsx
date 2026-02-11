@@ -196,6 +196,15 @@ const LoveReceipt = () => {
                       </p>
                     </div>
 
+                    <div className="my-4 text-center">
+                      <p className="text-lg font-bold" style={{ color: "#1a1a1a" }}>
+                        Will you be my Valentine?
+                      </p>
+                      <p className="mt-1 text-sm" style={{ color: "#666" }}>
+                        From: {config.senderName}
+                      </p>
+                    </div>
+
                     {!signed ? (
                       <motion.button
                         whileHover={{ scale: 1.02 }}
