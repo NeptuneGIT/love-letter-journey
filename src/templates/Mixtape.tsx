@@ -118,19 +118,19 @@ const Mixtape = () => {
                 <motion.div
                   animate={{ rotate: 360 }}
                   transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
-                  className="flex h-16 w-16 items-center justify-center rounded-full border-4"
-                  style={{ borderColor: "#5c3a1e", background: "#1a0a00" }}
+                  className="h-16 w-16 overflow-hidden rounded-full border-4"
+                  style={{ borderColor: "#5c3a1e" }}
                 >
-                  <div className="h-4 w-4 rounded-full" style={{ background: "#5c3a1e" }} />
+                  <img src={config.photos[0]} alt="" className="h-full w-full object-cover" />
                 </motion.div>
                 <div className="h-2 flex-1 rounded" style={{ background: "#5c3a1e" }} />
                 <motion.div
                   animate={{ rotate: 360 }}
                   transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
-                  className="flex h-16 w-16 items-center justify-center rounded-full border-4"
-                  style={{ borderColor: "#5c3a1e", background: "#1a0a00" }}
+                  className="h-16 w-16 overflow-hidden rounded-full border-4"
+                  style={{ borderColor: "#5c3a1e" }}
                 >
-                  <div className="h-4 w-4 rounded-full" style={{ background: "#5c3a1e" }} />
+                  <img src={config.photos[1]} alt="" className="h-full w-full object-cover" />
                 </motion.div>
               </div>
               <div className="mt-4 text-center text-xs" style={{ color: "#8b6540" }}>
@@ -162,7 +162,27 @@ const Mixtape = () => {
             exit={{ opacity: 0 }}
             className="flex min-h-screen flex-col items-center justify-center px-4"
           >
-            <div className="w-full max-w-md">
+            <div className="relative w-full max-w-md">
+              {/* Album art slideshow */}
+              <AnimatePresence mode="wait">
+                {playing && lyricIndex < lyrics.length && (
+                  <motion.div
+                    key={lyricIndex}
+                    initial={{ opacity: 0, scale: 1.1 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 1 }}
+                    className="absolute inset-0 -z-10 overflow-hidden rounded-xl"
+                  >
+                    <img
+                      src={config.photos[lyricIndex % config.photos.length]}
+                      alt=""
+                      className="h-full w-full object-cover blur-sm"
+                    />
+                    <div className="absolute inset-0" style={{ background: "rgba(26,10,0,0.6)" }} />
+                  </motion.div>
+                )}
+              </AnimatePresence>
               <div
                 className="mb-6 rounded-xl p-6"
                 style={{ background: "rgba(251,146,60,0.1)", border: "1px solid rgba(251,146,60,0.2)" }}
@@ -235,8 +255,20 @@ const Mixtape = () => {
             key="hidden"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            className="flex min-h-screen flex-col items-center justify-center px-4"
+            className="relative flex min-h-screen flex-col items-center justify-center px-4"
           >
+            {/* Photo mosaic background */}
+            <div className="pointer-events-none absolute inset-0 grid grid-cols-4 gap-2 p-4 opacity-10">
+              {config.photos.map((photo, i) => (
+                <img
+                  key={i}
+                  src={photo}
+                  alt=""
+                  className="h-full w-full rounded object-cover"
+                  style={{ transform: `rotate(${(i % 2 === 0 ? 1 : -1) * (2 + i)}deg)` }}
+                />
+              ))}
+            </div>
             {!showHidden ? (
               <motion.div
                 initial={{ scale: 0 }}
