@@ -1,9 +1,16 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 
+
+const SOCIETY_DETAILS = {
+  name: "The Computer Science Society", 
+  logo: "public/photos/logo.png", 
+};
+// ------------------------------------------------
+
 const templates = [
   {
-    category: "📸 Photo Templates",
+    category: "Photo Templates",
     items: [
       {
         name: "90s Retro Chaos",
@@ -66,7 +73,26 @@ const templates = [
 const Index = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-rose-50 via-pink-50 to-fuchsia-50">
-      <div className="mx-auto max-w-5xl px-4 py-12 sm:py-20">
+      
+      {/* --- NEW: SOCIETY HEADER --- */}
+      <motion.nav 
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="flex items-center justify-between px-6 py-4"
+      >
+        <div className="flex items-center gap-3 rounded-full bg-white/50 px-4 py-2 shadow-sm backdrop-blur-sm transition-all hover:bg-white/80">
+          <img 
+            src={SOCIETY_DETAILS.logo} 
+            alt={`${SOCIETY_DETAILS.name} Logo`} 
+            className="h-8 w-8 rounded-full object-cover"
+          />
+          <span className="font-bold text-rose-700 text-sm sm:text-base">
+            {SOCIETY_DETAILS.name}
+          </span>
+        </div>
+      </motion.nav>
+
+      <div className="mx-auto max-w-5xl px-4 py-8 sm:py-12">
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -74,11 +100,11 @@ const Index = () => {
           className="mb-16 text-center"
         >
           <h1 className="mb-3 text-5xl font-black tracking-tight text-rose-600 sm:text-6xl">
-            Interactive Valentine
+            Walentine Websites
           </h1>
-          <p className="mx-auto max-w-md text-lg text-rose-400/80">
+          {/* <p className="mx-auto max-w-md text-lg text-rose-400/80">
             Choose a template, customize it in{" "}, and send it to your Valentine 💌
-          </p>
+          </p> */}
         </motion.div>
 
         {templates.map((group, gi) => (
@@ -125,12 +151,14 @@ const Index = () => {
           </div>
         ))}
 
+        {/* --- UPDATED: FOOTER WITH SOCIETY NAME --- */}
         <motion.p
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1 }}
-          className="mt-12 text-center text-sm text-rose-300"
+          className="mt-12 text-center text-sm text-rose-400"
         >
+          Presented with 💖 by <span className="font-bold">{SOCIETY_DETAILS.name}</span>
         </motion.p>
       </div>
     </div>
