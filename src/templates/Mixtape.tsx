@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
 import { config } from "@/config";
@@ -9,8 +9,20 @@ const Mixtape = () => {
   const [playing, setPlaying] = useState(false);
   const [lyricIndex, setLyricIndex] = useState(0);
   const [showHidden, setShowHidden] = useState(false);
+  const audioRef = useRef(null);
 
   const lyrics = config.message.split(/[.!?]+/).filter(Boolean).map((s) => s.trim());
+
+  // Handle audio playback
+  useEffect(() => {
+    if (playing && audioRef.current) {
+      audioRef.current.play().catch((error) => {
+        console.error("Audio playback failed:", error);
+      });
+    } else if (!playing && audioRef.current) {
+      audioRef.current.pause();
+    }
+  }, [playing]);
 
   useEffect(() => {
     if (!playing || stage !== 2) return;
@@ -30,6 +42,17 @@ const Mixtape = () => {
         fontFamily: "'Courier New', monospace",
       }}
     >
+      {/* Audio element */}
+      <audio
+        ref={audioRef}
+        loop
+        preload="auto"
+      >
+        <source src={config.audioUrl} type="audio/mpeg" />
+        <source src={config.audioUrl} type="audio/wav" />
+        Your browser does not support the audio element.
+      </audio>
+
       <Link
         to="/"
         className="fixed left-4 top-4 z-50 rounded-full px-4 py-2 text-sm font-medium shadow backdrop-blur transition hover:bg-orange-900/50"

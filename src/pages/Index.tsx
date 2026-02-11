@@ -77,11 +77,7 @@ const Index = () => {
             Interactive Valentine
           </h1>
           <p className="mx-auto max-w-md text-lg text-rose-400/80">
-            Choose a template, customize it in{" "}
-            <code className="rounded bg-rose-100 px-1.5 py-0.5 font-mono text-sm text-rose-600">
-              src/config.ts
-            </code>
-            , and send it to your Valentine 💌
+            Choose a template, customize it in{" "}, and send it to your Valentine 💌
           </p>
         </motion.div>
 
@@ -135,7 +131,6 @@ const Index = () => {
           transition={{ delay: 1 }}
           className="mt-12 text-center text-sm text-rose-300"
         >
-          Fork → Edit config.ts → Deploy → Send the link 💖
         </motion.p>
       </div>
     </div>

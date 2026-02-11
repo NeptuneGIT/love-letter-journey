@@ -26,6 +26,9 @@ export const config = {
     "https://picsum.photos/seed/val8/400/400",
   ],
 
+    /** Audio URL for Mixtape background music */
+  audioUrl: "audio/exampleaudio.mp3",
+
   /** Receipt line items for "The Love Receipt" template */
   receiptItems: [
     { name: "Inside Jokes", qty: "× ∞" },
