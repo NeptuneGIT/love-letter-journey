@@ -275,14 +275,15 @@ const DesktopSimulator = () => {
             ) : (
               <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="relative">
                 {/* Photo mosaic background */}
-                <div className="pointer-events-none absolute inset-0 -inset-x-32 -inset-y-20 z-0 flex flex-wrap items-center justify-center gap-3 opacity-10">
+                {/* Photo mosaic background */}
+                <div className="pointer-events-none absolute inset-0 grid grid-cols-4 gap-2 p-4 opacity-10">
                   {config.photos.map((photo, i) => (
                     <img
                       key={i}
                       src={photo}
                       alt=""
-                      className="h-24 w-24 rounded object-cover"
-                      style={{ transform: `rotate(${(i % 2 === 0 ? 1 : -1) * (3 + (i % 5))}deg)` }}
+                      className="h-full w-full rounded object-cover"
+                      style={{ transform: `rotate(${(i % 2 === 0 ? 1 : -1) * (2 + i)}deg)` }}
                     />
                   ))}
                 </div>
